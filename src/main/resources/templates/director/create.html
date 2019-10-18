@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Create director</title>
+</head>
+<body>
+<h1>Create director</h1>
+<p>
+    <a href="/director/list">Director list</a>
+</p>
+<th:block th:if="${message}">
+    <p th:text="${message}"></p>
+</th:block>
+<form th:action="@{/director/create}" th:object="${director}" method="post">
+    <table>
+        <tr>
+            <td>Name:</td>
+            <td><input type="text" th:field="*{name}"/></td>
+        </tr>
+        <tr>
+            <td>Birth:</td>
+            <td><input type="text" th:field="*{birth}"/></td>
+        </tr>
+        <tr>
+            <td>Description:</td>
+            <td><textarea rows="5" th:field="*{description}"/></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><input type="submit" value="Create director"></td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Create movie</title>
+</head>
+<body>
+<h1>Create movie</h1>
+<p>
+    <a href="/movie/list">Movie list</a>
+</p>
+<th:block th:if="${message}">
+    <p th:text="${message}"></p>
+</th:block>
+<form th:action="@{/movie/create}" th:object="${movie}" method="post">
+    <table>
+        <tr>
+            <td>Movie name:</td>
+            <td><input type="text" th:field="*{name}"/></td>
+        </tr>
+        <tr>
+            <td>Actor:</td>
+            <td><input type="text" th:field="*{actor}"/></td>
+        </tr>
+        <tr>
+            <td>Price:</td>
+            <td><input type="text" th:field="*{price}"/></td>
+        </tr>
+        <tr>
+            <td>Release Time:</td>
+            <td><input type="text" th:field="*{releaseTime}"/></td>
+        </tr>
+        <tr>
+            <td>Director:</td>
+            <td>
+                <select th:field="*{director}">
+                    <option th:each="d : ${directors}" th:value="${d.id}" th:text="${d.name}"></option>
+                </select>
+            </td>
+        <tr>
+            <td></td>
+            <td><input type="submit" value="Create movie"></td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>

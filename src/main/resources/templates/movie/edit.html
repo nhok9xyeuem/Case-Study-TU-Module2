@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit movie</title>
+</head>
+<body>
+<h1>Edit customer</h1>
+<p>
+    <a href="/movie/list">Movie list</a>
+</p>
+<th:block th:if="${message}">
+    <p th:text="${message}"></p>
+</th:block>
+<form th:action="@{/movie/edit}" th:object="${movie}" method="post">
+    <input th:type="hidden" name="id" th:field="*{id}">
+    <table>
+        <tr>
+            <td>Movie name:</td>
+            <td><input type="text" th:field="*{name}"/></td>
+            <td><span class="error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span></td>
+        </tr>
+        <tr>
+            <td>Actor:</td>
+            <td><input type="text" th:field="*{actor}"/></td>
+        </tr>
+        <tr>
+            <td>Price:</td>
+            <td><input type="text" th:field="*{price}"/></td>
+            <td><span class="error" th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></span></td>
+        </tr>
+        <tr>
+            <td>Release Time:</td>
+            <td><input type="text" th:field="*{releaseTime}"/></td>
+        </tr>
+        <tr>
+            <td>Director:</td>
+            <td>
+                <select name="director">
+                    <option th:each="p : ${directors}"
+                            th:value="${p.id}"
+                            th:text="${p.name}">
+                    </option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><input type="submit" value="Update movie"></td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>

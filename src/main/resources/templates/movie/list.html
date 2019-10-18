@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<p><a href="/cart/show">Cart</a></p>
+<p><a href="/movie/create">Create new movie</a></p>
+<a href="/director/create">Create new director</a>
+<h1>Movies</h1>
+<form>
+    Search by Movie name:
+    <input name="s" type="text"/>
+    <input type="submit" value="Search"/>
+</form><br/>
+<table border="1">
+    <tr>
+        <th>Name</th>
+        <th>Actor</th>
+        <th>Price</th>
+        <th>Release Time</th>
+        <th>Director</th>
+
+    </tr>
+    <th:block th:each="movie : ${movies}">
+        <tr>
+            <td th:text="${movie.name}"></td>
+            <td th:text="${movie.actor}"></td>
+            <td th:text="${movie.price}"></td>
+            <td th:text="${movie.releaseTime}"></td>
+            <td th:text="${movie.director.name}"></td>
+            <td><a th:href="@{/movie/edit/__${movie.id}__ }">Edit</a></td>
+            <td><a th:href="@{/movie/delete/__${movie.id}__ }">Delete</a></td>
+            <td><a th:href="@{/movie/view/__${movie.id}__ }">View Detail</a></td>
+            <td><a th:href="@{/movie/add/__${movie.id}__(action='list') }">Add To Cart</a></td>
+        </tr>
+    </th:block>
+    <div>
+        <a th:href="@{'/movie/list'(page=${movies.number - 1})}" th:if="${movies.hasPrevious()}">Previous</a>
+        <span th:text="${movies.number + 1}"></span>/<span th:text="${movies.totalPages}"></span>
+        <a th:href="@{'/movie/list'(page=${movies.number + 1})}" th:if="${movies.hasNext()}">Next</a>
+    </div>
+</table>
+</body>
+</html>

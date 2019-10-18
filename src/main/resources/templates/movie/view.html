@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${movie.name}">Title</title>
+</head>
+<body>
+<p>
+    <a href="/movie/list">Movie list</a>
+</p>
+<table th:object="${movie}">
+    <tr>
+        <td>Movie name:</td>
+        <td th:text="*{name}"></td>
+    </tr>
+    <tr>
+        <td>Actor:</td>
+        <td th:text="*{actor}"></td>
+    </tr>
+    <tr>
+        <td>Price:</td>
+        <td th:text="*{price}"></td>
+    </tr>
+    <tr>
+        <td>Release Time:</td>
+        <td th:text="*{releaseTime}"></td>
+    </tr>
+    <tr>
+        <td><a th:href="@{/movie/add/__${movie.id}__(action='show') }">Add To Cart</a></td>
+    </tr>
+</table>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Cart</title>
+</head>
+<body>
+<p>
+    <a href="/movie/list">Movie list</a>
+</p>
+<h1 th:text="${'Items in Cart'}"></h1>
+<form action="#" th:object="${cart}" method="post">
+    <h3>Total Items: <span th:text="${cart.countItemQuantity()}"></span></h3>
+    <h3>Total Products: <span th:text="${cart.countMovieQuantity()}"></span></h3>
+    <table border="1">
+        <tr>
+            <th>Item</th>
+            <th>Quantity</th>
+            <th>Director</th>
+            <th>Release Time</th>
+            <th>Price</th>
+        </tr>
+        <tr th:each="movie: ${cart.movies}">
+            <td><a th:href="@{/movie/view/__${movie.getKey().id}__ }" th:text="${movie.getKey().name}" ></a></td>
+            <td>
+                <a id="decrease_button" th:href="@{/movie/remove/__${movie.getKey().id}__(action='show') }" th:text="${'-'}"></a>
+                <span th:text="${movie.getValue()}" ></span>
+                <a id="increase_button" th:href="@{/movie/add/__${movie.getKey().id}__(action='show') }" th:text="${'+'}"></a>
+            </td>
+            <td th:text="${movie.getKey().director.name}"></td>
+            <td th:text="${movie.getKey().releaseTime}"></td>
+            <td th:text="${movie.getKey().price}" ></td>
+        </tr>
+        <tr>
+            <td>Total</td>
+            <td></td>
+            <td th:text="${cart.countTotalPayment()}"></td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>

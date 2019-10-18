@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit director</title>
+</head>
+<body>
+<h1>Edit director</h1>
+<p>
+    <a href="/director/list">Director list</a>
+</p>
+<th:block th:if="${message}">
+    <p th:text="${message}"></p>
+</th:block>
+<form th:action="@{/director/edit}" th:object="${director}" method="post">
+    <input th:type="hidden" name="id" th:field="*{id}">
+    <table>
+        <tr>
+            <td>First name:</td>
+            <td><input type="text" th:field="*{name}"/></td>
+        </tr>
+        <tr>
+            <td>Birth:</td>
+            <td><input type="text" th:field="*{birth}"/></td>
+        </tr>
+        <tr>
+            <td>Description:</td>
+            <td><textarea rows="5" th:field="*{description}"/></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><input type="submit" value="Update director"></td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>
